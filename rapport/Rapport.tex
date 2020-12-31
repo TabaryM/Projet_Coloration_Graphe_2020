@@ -36,8 +36,23 @@
     \subsection{Donnez un schéma algorithmique déterministe permettant de trouver à coup sûr un 3-coloriage d'un graphe
     $G=(V, E)$ lorsque celui-ci est 3-coloriable}\label{subsec:Q2A}
 
-    \subsection{Évaluez sa complexité en fonction des dimensions du graphe $(n = |V| $ et $ m = |E|)$.}\label{subsec:Q2B}
+    On note $0$ la première couleur, $1$ la deuxième couleur et $2$ la troisième couleur.
+    \emph{Initialisation} : On fixe la couleur de tous les sommets à 0.
+    \emph{Tant qu'il existe une arête reliant deux sommets de la même couleur OU que tous les sommets ont une couleur différente de 2}
+    \begin{enumerate}
+        \item On ajoute 1 à la couleur du premier sommet.
+        \item Si la couleur du premier sommet est supérieure à 2 on la met à 0 et on augmente la valeur du sommet suivant.
+        \item Si le sommet suivant à une couleur supérieure à 2 on recommence avec le sommet suivant.
+    \end{enumerate}
 
+    Ce schéma algorithmique correspond à tester toutes les combinaisons possibles, même celles dont on est spur qui ne fonctionneront pas.
+
+    \subsection{Évaluez sa complexité en fonction des dimensions du graphe $(n = |V| $ et $ m = |E|)$.}\label{subsec:Q2B}
+    S'il existe toujours une arête reliant deux sommets de la même couleur, l'algorithme parcourra $3^n$ fois la boucle tant que.\\
+    La vérification de l'existence d'une arête reliant deux sommets de même couleur a comme complexité au pire cas $O(m)$.
+    En effet il suffit de parcourir chaque arête et regarder la couleur de ses deux extrémités.\\
+    L'incrémentation de la couleur de chaque sommet en moyenne prend $\log_3(m)$ en temps.\\
+    Ainsi cet algorithme a une complexité de $O(3^{n*m\log_3(m)})$
 
     \section{Algorithme heuristique}\label{sec:algorithme-heuristique}
 
