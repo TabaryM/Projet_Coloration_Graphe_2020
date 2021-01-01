@@ -1,0 +1,45 @@
+\begin{algorithm}[caption={3-coloriage}] \label{alg:alg1}
+    Fonction 3-coloriage(G : graphe, S : sommet,
+        couleur_dispo_depart : ensemble de couleur) : <sommet, ensemble de couleur>
+    Variables
+        couleur_voisins : ensemble de couleur
+        couleur_dispo_fin : ensemble de couleur
+        couleur_dispo_successeurs : ensemble de couleur
+        res : <sommet, ensemble de couleur>
+    Debut
+        res $\gets$ <null, null>
+        couleur_dispo_fin $\gets$ copie(couleur_dispo_depart)
+        couleur_voisins $\gets$ ensemble_vide()
+        Si (S est null) Alors
+            S = plusPetitSommet(G)
+        FinSi
+        Pour chaque sommet V dans voisins(G, S) Faire
+            Si couleur_voisins ne contient pas V.couleur Alors
+                couleur_voisins $\gets$ couleur_voisins + V.couleur
+            FinSi
+        FinPour
+
+        Pour chaque couleur C dans couleur_dispo_depart Faire
+            Si couleur_voisins contient C Alors
+                couleur_dispo_fin $\gets$ couleur_dispo_fin - C
+            FinSi
+        FinPour
+
+        Si couleur_dispo n'est pas vide Alors
+            S.couleur $\gets$ couleur_dispo_depart[0]
+            couleur_dispo_successeurs $\gets$ ensemble_vide()
+            couleur_dispo_successeurs $\gets$ couleur_dispo_successeurs + Rouge
+            couleur_dispo_successeurs $\gets$ couleur_dispo_successeurs + Vert
+            couleur_dispo_successeurs $\gets$ couleur_dispo_successeurs + Bleu
+            couleur_dispo_successeurs $\gets$ couleur_dispo_successeurs - S.couleur
+            Pour chaque sommet V dans voisins(G, S) Faire
+                res = 3-coloriage(G, V, couleur_dispo_successeur)
+            FinPour
+        Sinon
+            res = <S, couleur_voisins>
+        FinSi
+
+        retourner res
+
+    Fin
+\end{algorithm}

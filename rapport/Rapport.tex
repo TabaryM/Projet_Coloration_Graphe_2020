@@ -20,6 +20,13 @@
 % Mise en page
 \usepackage{multicol}
 
+\usepackage{color}
+\usepackage{listings}
+\usepackage{caption}
+
+%Description de pseudocode
+\include{pseudocode_descriptor}
+
 % Document
 \begin{document}
     \maketitle
@@ -69,6 +76,17 @@
     En effet, les sommets coloriés sont bien coloriés, et les sommets non coloriés ne sont pas mal coloriés.
 
     \subsection{Déduisez-en un algorithme polynômial qui cherche un 3-coloriage d’un graphe donné}\label{subsec:Q3B}
+
+    Pour cet algorithme nous allons utiliser des ensembles avec des méthodes pré-définies telles que :
+    \begin{enumerate}
+        \item \emph{ensemble\_vide()} qui retourne un nouvel ensemble vide. (Opération en temps constant)
+        \item \emph{copie(E : ensemble)} qui retourne une copie profonde de l'ensemble E passé en paramètre. (Opération en temps polynomial (taille de l'ensemble copié))
+        \item \emph{E + elt} qui ajoute à l'ensemble \emph{E} l'élément \emph{elt} (Opération en temps constant)
+        \item \emph{E - elt} qui retire à l'ensemble \emph{E} l'élément \emph{elt} (Opération en temps constant)
+    \end{enumerate}
+
+    \newpage
+    \input{question3b.tex}
 
     \newpage
     \section{Application aux N-cubes}\label{sec:application-aux-n-cubes}
