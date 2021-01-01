@@ -31,6 +31,8 @@
 
     Ce projet a été réalisé par Paul-Emile Watelot et Mathieu Tabary en première année de Master Informatique de Nancy.
 
+    L'objectif de ce projet est de concevoir et mettre en oeuvre un algorithme heuristique de 3-coloriage d'un graphe.
+
     \section{Complexité du 3-coloriage}\label{sec:complexite-du-3-coloriage}
 
     \subsection{Donnez un schéma algorithmique déterministe permettant de trouver à coup sûr un 3-coloriage d'un graphe
@@ -52,10 +54,23 @@
     La vérification de l'existence d'une arête reliant deux sommets de même couleur a comme complexité au pire cas $O(m)$.
     En effet il suffit de parcourir chaque arête et regarder la couleur de ses deux extrémités.\\
     L'incrémentation de la couleur de chaque sommet en moyenne prend $\log_3(m)$ en temps.\\
-    Ainsi cet algorithme a une complexité de $O(3^{n*m\log_3(m)})$
+    Ainsi cet algorithme a une complexité de $O(3^n*m\log_3(m))$, il n'est donc pas applicable en pratique.
 
+    \newpage
     \section{Algorithme heuristique}\label{sec:algorithme-heuristique}
 
+    \subsection{Proposez une stratégie de 3-coloriage d'un graphe
+    en expliquant précisément en quoi elle favorise l'obtention d'un coloriage valide}\label{subsec:Q3A}
+    On sélectionne le sommet de plus petit degré, on lui attribue une des trois couleurs possibles,
+    puis on tente de colorier les sommets voisins avec les deux couleurs restantes (les trois couleurs, sans la couleur attribuée au premier sommet).
+    Pour chaque sommet ainsi colorier, on essaie de colorier les sommets voisins avec les couleurs restantes disponibles.
+
+    Cette stratégie favorise l'obtention d'un coloriage valide car on travaille avec un sous-graphe toujours bien colorié.
+    En effet, les sommets coloriés sont bien coloriés, et les sommets non coloriés ne sont pas mal coloriés.
+
+    \subsection{Déduisez-en un algorithme polynômial qui cherche un 3-coloriage d’un graphe donné}\label{subsec:Q3B}
+
+    \newpage
     \section{Application aux N-cubes}\label{sec:application-aux-n-cubes}
 
 \end{document}
