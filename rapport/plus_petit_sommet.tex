@@ -1,0 +1,16 @@
+\begin{algorithm}[caption={Plus petit sommet}] \label{alg:pps}
+    Fonction plus_petit_sommet(G : $graphe$) : $sommet$
+    Variables
+        res : $sommet$
+        plus_petit_degre : $entier$
+    Debut
+        plus_petit_degre $\gets$ $\infty$
+        Pour chaque sommet S dans sommets(G) Faire
+            Si (plus_petit_degre > S.degre) Alors
+                plus_petit_degre $\gets$ S.degre
+                res $\gets$ S
+            FinSi
+        FinPour
+        retourner res
+    Fin
+\end{algorithm}

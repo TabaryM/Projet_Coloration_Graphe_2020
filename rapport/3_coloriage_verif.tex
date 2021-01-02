@@ -1,0 +1,14 @@
+\begin{algorithm}[caption={Vérification 3-coloriage}] \label{alg:3color_verif}
+    Fonction verification_3_coloriage(G : $graphe$) : $booléen$
+        Variables
+            res : $booléen$
+        Debut
+            res = vrai
+            Pour chaque sommet S dans sommets(G) Faire
+                Pour chaque sommet S dans voisins(G, S) Faire
+                    res = res et (S.couleur $\ne$ V.couleur)
+                FinPour
+            FinPour
+            retourner res
+        Fin
+\end{algorithm}

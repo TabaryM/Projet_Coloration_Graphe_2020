@@ -19,6 +19,7 @@
 
 % Mise en page
 \usepackage{multicol}
+\usepackage{hyperref}
 
 \usepackage{color}
 \usepackage{listings}
@@ -77,18 +78,70 @@
 
     \subsection{Déduisez-en un algorithme polynômial qui cherche un 3-coloriage d’un graphe donné}\label{subsec:Q3B}
 
-    Pour cet algorithme nous allons utiliser des ensembles avec des méthodes pré-définies telles que :
-    \begin{enumerate}
+    Pour cet algorithme nous allons utiliser des ensembles avec les méthodes pré-définies suivantes :
+    \begin{itemize}
         \item \emph{ensemble\_vide()} qui retourne un nouvel ensemble vide. (Opération en temps constant)
+        \item \emph{est\_vide(E : ensemble)} qui retourne un vrai si l'ensemble $E$ est vide, faux sinon. (Opération en temps constant)
         \item \emph{copie(E : ensemble)} qui retourne une copie profonde de l'ensemble E passé en paramètre. (Opération en temps polynomial (taille de l'ensemble copié))
-        \item \emph{E + elt} qui ajoute à l'ensemble \emph{E} l'élément \emph{elt} (Opération en temps constant)
-        \item \emph{E - elt} qui retire à l'ensemble \emph{E} l'élément \emph{elt} (Opération en temps constant)
-    \end{enumerate}
+        \item \emph{contient(E : ensemble, elt : élément)} qui retourne vrai si $E$ contient l'élément $elt$, faux sinon. (Opération en temps constant)
+        \item \emph{ajout(E, elt)} qui ajoute à l'ensemble \emph{E} l'élément \emph{elt} (Opération en temps constant)
+        \item \emph{retire(E, elt)} qui retire à l'ensemble \emph{E} l'élément \emph{elt} (Opération en temps constant)
+    \end{itemize}
 
-    \newpage
-    \input{question3b.tex}
+    Nous allons aussi utiliser les méthodes sur les graphes suivantes :
+    \begin{itemize}
+        \item \emph{sommets(G)} qui retourne la liste des sommets de G
+        \item \emph{voisins(G, S)} qui retourne la liste des voisins de S dans G
+    \end{itemize}
 
+    \bigskip
+    Cet algorithme utilisera aussi la méthode \emph{plus\_petit\_sommet(G : graphe)},
+    définie ci-dessous, qui retourne le sommet de degré le plus petit du graphe G\@.
     \newpage
+    \input{plus_petit_sommet}
+    \input{3_coloriage.tex}
+
+    \subsection{Proposez un algorithme qui vérifie si un sommet en conflit lors d’une tentative de 3-coloriage
+    appartient à une 4-clique.}\label{subsec:Q3C}
+    Pour chercher efficacement toutes les 4-cliques on fait une recherche récursive pour avoir un backtracking.
+    Voici la fonction récursive utilisée :
+    \input{4_clique}
+
+    \subsection{Proposez un algorithme qui vérifie qu'un 3-coloriage d'un graphe est valide.}\label{subsec:Q3D}
+    \input{3_coloriage_verif.tex}
+
+    \subsection{Évaluez théoriquement la complexité de vos trois algorithmes.}\label{subsec:Q3E}
+    \subsubsection{Complexité théorique de l'algorithme de 3-coloriage}\label{subsubsec:Q3E1}
+    La recherche du sommet au plus petit degré ne se fait qu'une fois et se fait par un parcours de tous les sommets du graphe.
+    Ce qui a comme complexité $O(n)$.
+
+    On effectue une récursion pour tous les sommets, ce qui ajoute un facteur de complexité de $O(n)$.
+
+    Le nombre moyen de voisins par sommet est de $\frac{m}{n}$.
+    Donc l'itération sur les voisins d'un sommet a une complexité de $O(\frac{m}{n})$.
+
+    Le nombre maximum de couleur dans la liste des couleurs des voisins d'un sommet est 3 pour un 3-coloriage.
+    Donc le parcours de la liste des couleurs des voisins du sommet que l'on colorie a une complexité de $O(3)$.
+
+    En composant toutes ces complexités on obtient la complexité de l'algorithme : $O\left(n+\left(n*\left(\frac{m}{n}+3\right)\right)\right)$.\\
+    Cette complexité se simplifie en $O(n+m+3n)$ puis en $O(4n+m)$ qui est une complexité polynomiale.
+
+    \subsubsection{Complexité théorique de l'algorithme de recherche d'une 4-clique dans un graphe}\label{subsubsec:Q3E2}
+    La récursion sur tous les sommets du graphe ajoute un facteur de complexité de $O(n)$.
+
+    La récursion sur tous les voisins d'un sommet ajoute un facteur de complexité de $O\left(\frac{m}{n}\right)$.
+    Cette récursion est faite trois fois :
+    la première pour tous les voisins de S1, la deuxième pour les voisins de S1 et S2 et la troisième pour les voisins de S1, S2 et S3.
+    Ces trois récursions se composent avec comme complexité $O($($\frac{m}{n}$)$^3)$
+
+    En composant ces complexités on obtient la complexité de l'algorithme : $O(n*$($\frac{m}{n}$)$^3)$\\
+    Cet algorithme est donc polynomial (mais exponentiel en la taille de la clique recherchée).
+
+    \subsubssection{Complexité théorique de l'algorithme de vérification d'un 3-coloriage d'un graphe}\label{subsubsec:Q3E3}
+    Cet algorithme effectue un parcours de chaque arête pour tous les sommets, donc chaque arête est parcourue deux fois
+    Ce qui a comme complexité $O(2mn)$.\\
+    Cet algorithme est donc polynomial.
+
     \section{Application aux N-cubes}\label{sec:application-aux-n-cubes}
 
 \end{document}

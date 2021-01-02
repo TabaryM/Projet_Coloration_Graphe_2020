@@ -1,0 +1,31 @@
+\begin{algorithm}[caption={4-clique}] \label{alg:4clique}
+    Fonction 4_clique (G : $graphe$, S1, S2, S3 : $sommet$) : $ensemble\ de\ sommet$
+    Variables
+        res : $ensemble\ de\ sommet$
+    Debut
+        Si (S1 = null) Alors
+            Pour chaque sommet S dans sommets(G) Faire
+                res $\gets$ 4_clique(G, S, null, null)
+            FinPour
+        Sinon Si (S2 = null) Alors
+            Pour chaque sommet V dans voisins(G, S1) Faire
+                res $\gets$ 4_clique(G, S, V, null)
+            FinPour
+        Sinon Si (S3 = null) Alors
+            Pour chaque sommet V dans voisins(G, S1) Faire
+                // Si V est voisin de S2
+                Si (contient(voisins(G, S2), V)) Alors
+                    res $\gets$ 4_clique(G, S1, S2, V)
+                FinSi
+            FinPour
+        Sinon
+            Pour chaque sommet V dans voisins(G, S1) Faire
+                // Si V est voisin de S2 et S3
+                Si (contient(voisins(G, S2), V) et contient(voisins(G, S3), V)) Alors
+                    res = <S1, S2, S3, V>
+                FinSi
+            FinPour
+        FinSi
+        retourner res
+    Fin
+\end{algorithm}
