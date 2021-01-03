@@ -24,6 +24,8 @@
 \usepackage{color}
 \usepackage{listings}
 \usepackage{caption}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 
 %Description de pseudocode
 \include{pseudocode_descriptor}
@@ -148,5 +150,30 @@
     Cet algorithme est donc polynomial.
 
     \section{Application aux N-cubes}\label{sec:application-aux-n-cubes}
+
+    \subsection{Quelle conjecture peut-on déduire de l'application de notre schéma algorithmique sur les N-cubes}\label{subsec:Q4C}
+    En appliquant notre schéma algorithmique au N-cubes allant de 0 à 8, on peut observer qu'ils sont 2-coloriables (et donc 3-coloriables aussi).
+
+    \subsection{Montrer formellement si cette conjecture est vraie ou fausse}\label{subsec:Q4D}
+    Si un graphe est biparti, alors il est possible de le colorier avec une couleur par partie, autrement dit, il est 2-coloriable.
+
+    Prouvons donc que les N-cubes sont biparti.
+
+    On peut voir facilement que un 1-cube est biparti, avec dans une partie le sommet 0, et dans l'autre le sommet 1.
+
+    Supposons qu'un k-cube (graphe G) est biparti.
+    Construisons un k+1-cube G' à partir de G.
+    Les sommets de G' sont tous les sommets de G, ainsi que pour chaque sommet $s_i$ un nouveau sommet $s_{i+2^k}$.\\
+    Les arêtes de G' sont toutes les arêtes de G,
+    ainsi que pour toutes les arêtes reliant $s_i$ à $s_j$ dans G, on créer une arête reliant $s_{i+2^k}$ à $s_{j+2^k}$.
+    Avec $s_i$ dans une des deux partie du graphe G,
+    on a $s_i$ dans la même partie dans G' et $s_{i+2^k}$ dans l'autre partie de G'.
+    Le k+1-cube ainsi construit est donc aussi biparti.
+
+    Nous venons ainsi de construire récursivement la preuve qu'un N-cube est toujours biparti.
+
+    Étant donné qu'un graphe biparti est 2-coloriable, les N-cubes sont aussi 2-coloriables.
+
+    La conjecture faite précédement est donc vraie.
 
 \end{document}

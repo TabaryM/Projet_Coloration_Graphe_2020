@@ -11,9 +11,26 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-        question3f();
+        question4bCSV();
+        /*question3f();
         question4b();
-        question4c();
+        question4c();*/
+    }
+
+    private static void question4bCSV() {
+        Graphe graphe;
+        for(int i = 0; i <= 8; i++){
+            graphe = Graphe.getGrapheFromNCube(i);
+            Graphe.saveGrapheasCSV("out/"+i+"_cube.csv", graphe);
+        }
+    }
+
+    private static void question4b() {
+        Graphe graphe;
+        for(int i = 0; i <= 8; i++){
+            graphe = Graphe.getGrapheFromNCube(i);
+            Graphe.saveGraphe("ressources/ncubes/"+i+"_cube.txt", graphe);
+        }
     }
 
     private static void question4c() {
@@ -32,14 +49,6 @@ public class Main {
         }
         fin = System.currentTimeMillis();
         System.out.println("\nTemps d'execution : "+((fin-debut)/1000f)+" secondes");
-    }
-
-    private static void question4b() {
-        Graphe graphe;
-        for(int i = 0; i <= 8; i++){
-            graphe = Graphe.getGrapheFromNCube(i);
-            Graphe.saveGraphe("ressources/ncubes/"+i+"_cube.txt", graphe);
-        }
     }
 
     private static void question3f() {
