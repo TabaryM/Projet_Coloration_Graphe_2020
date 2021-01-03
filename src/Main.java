@@ -1,9 +1,8 @@
 import graphe.Couleur;
 import graphe.Graphe;
-import graphe.Sommet;
+import graphe.SommetMalColore;
 
 import java.io.File;
-import java.util.Random;
 
 /**
  * @author Tabary
@@ -17,17 +16,11 @@ public class Main {
         }
         Graphe graphe;
         String messageColoriage;
+        boolean clique4;
         long debut, fin;
         debut = System.currentTimeMillis();
         for(File file : files){
-            System.out.println("\nColoration du graphe "+file.getName());
-            graphe = Graphe.getGrapheFromTxt(file.getPath());
-            messageColoriage = graphe.coloriage(null, Couleur.getCouleur3Coloriage());
-            if(!messageColoriage.equals("Coloriage réussis")){
-                System.out.println(messageColoriage);
-            } else {
-                System.out.println(graphe.sommetsColores());
-            }
+            test3coloriage(file);
         }
         fin = System.currentTimeMillis();
         System.out.println("\nTemps d'execution : "+((fin-debut)/1000f)+" secondes");
@@ -40,6 +33,28 @@ public class Main {
         } else {
             System.out.println("ALERT");
             return null;
+        }
+    }
+
+    public static void test3coloriage(File file){
+        SommetMalColore sommetMalColore;
+        boolean clique4;
+        System.out.println("\nColoration du graphe "+file.getName());
+        Graphe graphe = Graphe.getGrapheFromTxt(file.getPath());
+        sommetMalColore = graphe.coloriage(null, Couleur.getCouleur3Coloriage());
+        if(sommetMalColore.getSommet() != null){
+            clique4 = graphe.clique4(sommetMalColore.getSommet(), null, null);
+            if(clique4){
+                System.out.println("C'est normal que la coloration ai raté");
+            } else {
+                System.out.println("\033[33mJ'ai chié dans la colle\033[0m");
+            }
+            System.out.println(sommetMalColore);
+        } else {
+            if(graphe.valideColoration()){
+                System.out.println("\033[36mJ'ai VRAIMENT chié dans la colle\033[0m");
+            }
+            System.out.println(graphe.sommetsColores());
         }
     }
 }

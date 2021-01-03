@@ -57,8 +57,8 @@ public class Graphe implements Iterable<Sommet>{
         return res;
     }
 
-    public String coloriage(Sommet sommet, List<Couleur> couleursDispoDepart){
-        String res = "Coloriage réussis";
+    public SommetMalColore coloriage(Sommet sommet, List<Couleur> couleursDispoDepart){
+        SommetMalColore res = new SommetMalColore(null, new ArrayList<>());
         List<Couleur> couleursDispoFin = new ArrayList<>(couleursDispoDepart);
         List<Couleur> couleursVoisins = new ArrayList<>();
 
@@ -88,27 +88,64 @@ public class Graphe implements Iterable<Sommet>{
                 for(Sommet voisin : voisinsSansCouleur(sommet)){
                     if(!voisin.isColorie()) {
                         res = coloriage(voisin, couleursDispoSuccesseurs);
-                        if(!res.equals("Coloriage réussis")){
+                        if(res.getSommet() != null){
                             return res;
                         }
                     }
                 }
             } else {
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("Sommet non coloriable : ").append(sommet.toString());
-                stringBuilder.append("\tCouleur des voisins : ");
-                for(Couleur couleur : couleursVoisins){
-                    stringBuilder.append(" ").append(couleur.asMessage());
-                }
-                stringBuilder.append("\033[0m");
-                res = stringBuilder.toString();
+                res = new SommetMalColore(sommet, couleursVoisins);
             }
 
         }
         return res;
     }
 
+    public boolean clique4(Sommet s1, Sommet s2, Sommet s3){
+        boolean res = false;
+        if(s1 == null){
+            for(Sommet sommet : sommets){
+                if(!res) {
+                    res = clique4(sommet, null, null);
+                }
+            }
+        } else if (s2 == null){
+            for(Sommet voisin : voisins(s1)){
+                if(!res) {
+                    res = clique4(s1, voisin, null);
+                }
+            }
+        } else if (s3 == null){
+            for(Sommet voisin : voisins(s1)){
+                if(!res) {
+                    if(voisins(s2).contains(voisin)) {
+                        res = clique4(s1, s2, voisin);
+                    }
+                }
+            }
+        } else {
+            for(Sommet voisin : voisins(s1)){
+                if(!res){
+                    if(voisins(s2).contains(voisin) && voisins(s3).contains(voisin)){
+                        res = true;
+                    }
+                }
+            }
+        }
+        return res;
+    }
 
+    public boolean valideColoration(){
+        boolean res = true;
+        for(Sommet sommet : sommets){
+            for(Sommet voisin : voisins(sommet)){
+                res = res && sommet.getCouleur().equals(voisin.getCouleur());
+                if(!res)
+                    break;
+            }
+        }
+        return res;
+    }
 
     public int degre(Sommet sommet){
         int res = 0;
@@ -172,6 +209,7 @@ public class Graphe implements Iterable<Sommet>{
             stringBuilder.append(sommet.toString());
             stringBuilder.append(' ');
         }
+        stringBuilder.append(Couleur.colorCode(Couleur.NOCOULEUR));
         return stringBuilder.toString();
     }
 }
