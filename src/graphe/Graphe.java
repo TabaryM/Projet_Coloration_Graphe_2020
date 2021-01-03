@@ -43,9 +43,14 @@ public class Graphe implements Iterable<Sommet>{
     }
 
     public static Graphe getGrapheFromNCube(int n){
-        Graphe res = null;
+        Graphe res;
 
-        String formatBit = "%"+n+"s";
+        String formatBit;
+        if(n == 0) {
+            formatBit = "%"+1+"s";
+        } else {
+            formatBit = "%"+n+"s";
+        }
 
         int taille = (int) Math.pow(2,n);
         boolean[][] matrice = new boolean[taille][taille];
@@ -217,10 +222,11 @@ public class Graphe implements Iterable<Sommet>{
         boolean res = true;
         for(Sommet sommet : sommets){
             for(Sommet voisin : voisins(sommet)){
-                res = res && sommet.getCouleur().equals(voisin.getCouleur());
-                if(!res)
-                    break;
+                //System.out.println(sommet.getCouleur().asMessage()+" "+voisin.getCouleur().asMessage());
+                res = res && sommet.getCouleur() != voisin.getCouleur();
+                if(!res) break;
             }
+            if(!res) break;
         }
         return res;
     }

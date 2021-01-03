@@ -36,7 +36,7 @@ public class Main {
 
     private static void question4b() {
         Graphe graphe;
-        for(int i = 1; i <= 8; i++){
+        for(int i = 0; i <= 8; i++){
             graphe = Graphe.getGrapheFromNCube(i);
             Graphe.saveGraphe("ressources/ncubes/"+i+"_cube.txt", graphe);
         }
@@ -86,17 +86,20 @@ public class Main {
             clique4 = graphe.clique4(sommetMalColore.getSommet(), null, null);
             if(clique4.size() >= 4){
                 // Cas d'échec justifié
-                System.out.println("C'est normal que la coloration ai raté, on a la clique "+clique4);
+                System.out.println("Échec justifié par la présence de la clique "+clique4);
             } else {
                 // Cas d'échec injustifié
-                System.out.println("\033[33mJ'ai chié dans la colle\033[0m");
+                System.out.println("\033[33mÉchec de 3-coloriage non justifié par la présence d'une 4-clique\033[0m");
             }
             System.out.println(sommetMalColore);
         } else {
             // Cas de succès du coloriage
             if(graphe.valideColoration()){
+                // Cas de succès justifié
+                System.out.println("\033[36m3-coloration valide\033[0m");
+            } else {
                 // Cas de succès injustifié
-                System.out.println("\033[36mJ'ai VRAIMENT chié dans la colle\033[0m");
+                System.out.println("\033[35m3-coloration invalide selon l'algorithme de vérification\033[0m");
             }
             System.out.println(graphe.sommetsColores());
         }
