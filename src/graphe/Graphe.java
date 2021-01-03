@@ -96,6 +96,28 @@ public class Graphe implements Iterable<Sommet>{
         }
     }
 
+    // Utile pour regarder la matrice d'adjacence dans un tableur
+    public static void saveGrapheasCSV(String path, Graphe graphe){
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(path));
+
+            writer.write(graphe.nbSommets+"\n");
+
+            for(int i = 0; i < graphe.nbSommets; i++){
+                for(int j = 0; j < graphe.nbSommets; j++){
+                    if(graphe.matriceAdjacence[i][j]) writer.write('1');
+                    else writer.write('0');
+                    writer.write(';');
+                }
+                writer.write('\n');
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Sommet plusPetitSommet(){
         Sommet res = null;
         int degre = Integer.MAX_VALUE, degreSommet;
@@ -137,6 +159,7 @@ public class Graphe implements Iterable<Sommet>{
                 sommet.setCouleur(couleursDispoFin.get(0));
                 List<Couleur> couleursDispoSuccesseurs = Couleur.getCouleur3Coloriage();
                 couleursDispoSuccesseurs.remove(sommet.getCouleur());
+
                 for(Sommet voisin : voisinsSansCouleur(sommet)){
                     if(!voisin.isColorie()) {
                         res = coloriage(voisin, couleursDispoSuccesseurs);

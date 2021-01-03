@@ -11,18 +11,50 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
+        question3f();
+        question4b();
+        question4c();
+    }
+
+    private static void question4c() {
+        File[] files = getGraphesFromDir("ressources/ncubes");
+        if(files == null){
+            System.out.println("ALED");
+            return;
+        }
+
+        long debut, fin;
+        debut = System.currentTimeMillis();
+        for(File file : files){
+            if(file.isFile()) {
+                test3coloriage(file);
+            }
+        }
+        fin = System.currentTimeMillis();
+        System.out.println("\nTemps d'execution : "+((fin-debut)/1000f)+" secondes");
+    }
+
+    private static void question4b() {
+        Graphe graphe;
+        for(int i = 1; i <= 8; i++){
+            graphe = Graphe.getGrapheFromNCube(i);
+            Graphe.saveGraphe("ressources/ncubes/"+i+"_cube.txt", graphe);
+        }
+    }
+
+    private static void question3f() {
         File[] files = getGraphesFromDir("ressources");
         if(files == null){
             System.out.println("ALED");
             return;
         }
-        Graphe graphe;
-        String messageColoriage;
-        boolean clique4;
+
         long debut, fin;
         debut = System.currentTimeMillis();
         for(File file : files){
-            test3coloriage(file);
+            if(file.isFile()) {
+                test3coloriage(file);
+            }
         }
         fin = System.currentTimeMillis();
         System.out.println("\nTemps d'execution : "+((fin-debut)/1000f)+" secondes");
