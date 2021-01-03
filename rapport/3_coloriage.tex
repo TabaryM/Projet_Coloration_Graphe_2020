@@ -25,16 +25,19 @@
                 FinSi
             FinPour
             Si (non est_vide(couleur_dispo)) Alors
-                S.couleur $\gets$ couleur_dispo_depart[0]
+                S.couleur $\gets$ premier(couleur_dispo_depart)
                 couleur_dispo_successeurs $\gets$ ensemble_vide()
                 ajout(couleur_dispo_successeurs, Rouge)
                 ajout(couleur_dispo_successeurs, Vert)
                 ajout(couleur_dispo_successeurs, Bleu)
                 retire(couleur_dispo_successeurs, S.couleur)
                 Pour chaque sommet V dans voisins(G, S) Faire
-                    res $\gets$ 3-coloriage(G, V, couleur_dispo_successeur)
-                    Si (res $\ne$ null) Alors
-                        retourner res
+                    Si (V.couleur $\ne$ null) Alors
+                        res $\gets$ 3-coloriage(G, V, couleur_dispo_successeur)
+                        Si (res $\ne$ null) Alors
+                            retourner res
+                        FinSi
+                    FinSi
                 FinPour
             Sinon
                 res $\gets$ <S, couleur_voisins>

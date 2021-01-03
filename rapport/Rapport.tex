@@ -46,16 +46,16 @@
     \subsection{Donnez un schéma algorithmique déterministe permettant de trouver à coup sûr un 3-coloriage d'un graphe
     $G=(V, E)$ lorsque celui-ci est 3-coloriable}\label{subsec:Q2A}
 
-    On note $0$ la première couleur, $1$ la deuxième couleur et $2$ la troisième couleur.
-    \emph{Initialisation} : On fixe la couleur de tous les sommets à 0.
-    \emph{Tant qu'il existe une arête reliant deux sommets de la même couleur OU que tous les sommets ont une couleur différente de 2}
+    On note $0$ la première couleur, $1$ la deuxième couleur et $2$ la troisième couleur.\\
+    \emph{Initialisation} : On fixe la couleur de tous les sommets à 0.\\
+    \emph{Tant qu'il existe une arête reliant deux sommets de la même couleur OU que tous les sommets ont une couleur différente de 2 Faire}
     \begin{enumerate}
         \item On ajoute 1 à la couleur du premier sommet.
         \item Si la couleur du premier sommet est supérieure à 2 on la met à 0 et on augmente la valeur du sommet suivant.
         \item Si le sommet suivant à une couleur supérieure à 2 on recommence avec le sommet suivant.
     \end{enumerate}
 
-    Ce schéma algorithmique correspond à tester toutes les combinaisons possibles, même celles dont on est spur qui ne fonctionneront pas.
+    Ce schéma algorithmique correspond à tester toutes les combinaisons possibles, même celles dont on est sûr qui ne fonctionneront pas.
 
     \subsection{Évaluez sa complexité en fonction des dimensions du graphe $(n = |V| $ et $ m = |E|)$.}\label{subsec:Q2B}
     S'il existe toujours une arête reliant deux sommets de la même couleur, l'algorithme parcourra $3^n$ fois la boucle tant que.\\
@@ -65,6 +65,7 @@
     Ainsi cet algorithme a une complexité de $O(3^n*m\log_3(m))$, il n'est donc pas applicable en pratique.
 
     \newpage
+
     \section{Algorithme heuristique}\label{sec:algorithme-heuristique}
 
     \subsection{Proposez une stratégie de 3-coloriage d'un graphe
@@ -86,12 +87,14 @@
         \item \emph{contient(E : ensemble, elt : élément)} qui retourne vrai si $E$ contient l'élément $elt$, faux sinon. (Opération en temps constant)
         \item \emph{ajout(E, elt)} qui ajoute à l'ensemble \emph{E} l'élément \emph{elt} (Opération en temps constant)
         \item \emph{retire(E, elt)} qui retire à l'ensemble \emph{E} l'élément \emph{elt} (Opération en temps constant)
+        \item \emph(premier(E)) qui retourne le premier élément de l'ensemble E (Opération en temps constant)
     \end{itemize}
 
     Nous allons aussi utiliser les méthodes sur les graphes suivantes :
     \begin{itemize}
-        \item \emph{sommets(G)} qui retourne la liste des sommets de G
-        \item \emph{voisins(G, S)} qui retourne la liste des voisins de S dans G
+        \item \emph{sommets(G)} qui retourne la liste des sommets de G\@.
+        \item \emph{voisins(G, S)} qui retourne la liste des voisins de S dans G\@.
+        \item \emph{degre(G, S)} qui retourne le degré du sommet S dans G\@.
     \end{itemize}
 
     \bigskip

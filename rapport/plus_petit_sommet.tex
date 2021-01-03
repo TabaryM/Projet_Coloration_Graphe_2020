@@ -6,8 +6,8 @@
     Debut
         plus_petit_degre $\gets$ $\infty$
         Pour chaque sommet S dans sommets(G) Faire
-            Si (plus_petit_degre > S.degre) Alors
-                plus_petit_degre $\gets$ S.degre
+            Si (plus_petit_degre > degre(G, S)) Alors
+                plus_petit_degre $\gets$ degre(G, S)
                 res $\gets$ S
             FinSi
         FinPour
