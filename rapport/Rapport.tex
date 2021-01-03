@@ -85,11 +85,13 @@
         \item \emph{est\_vide(E : ensemble)} qui retourne un vrai si l'ensemble $E$ est vide, faux sinon. (Opération en temps constant)
         \item \emph{copie(E : ensemble)} qui retourne une copie profonde de l'ensemble E passé en paramètre. (Opération en temps polynomial (taille de l'ensemble copié))
         \item \emph{contient(E : ensemble, elt : élément)} qui retourne vrai si $E$ contient l'élément $elt$, faux sinon. (Opération en temps constant)
-        \item \emph{ajout(E, elt)} qui ajoute à l'ensemble \emph{E} l'élément \emph{elt} (Opération en temps constant)
-        \item \emph{retire(E, elt)} qui retire à l'ensemble \emph{E} l'élément \emph{elt} (Opération en temps constant)
-        \item \emph(premier(E)) qui retourne le premier élément de l'ensemble E (Opération en temps constant)
+        \item \emph{ajout(E, elt)} qui ajoute à l'ensemble \emph{E} l'élément \emph{elt}. (Opération en temps constant)
+        \item \emph{retire(E, elt)} qui retire à l'ensemble \emph{E} l'élément \emph{elt}. (Opération en temps constant)
+        \item \emph{premier(E)} qui retourne le premier élément de l'ensemble E. (Opération en temps constant)
+        \item \emph{taille(E)} qui retourne le nombre d'élément dans l'ensemble E. (Opération en temps polynomial (taille de l'ensemble copié))
     \end{itemize}
 
+    \bigskip
     Nous allons aussi utiliser les méthodes sur les graphes suivantes :
     \begin{itemize}
         \item \emph{sommets(G)} qui retourne la liste des sommets de G\@.
@@ -100,7 +102,7 @@
     \bigskip
     Cet algorithme utilisera aussi la méthode \emph{plus\_petit\_sommet(G : graphe)},
     définie ci-dessous, qui retourne le sommet de degré le plus petit du graphe G\@.
-    \newpage
+
     \input{plus_petit_sommet}
     \input{3_coloriage.tex}
 

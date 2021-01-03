@@ -37,7 +37,7 @@ public enum Couleur {
                 res = "\033[34mB";
                 break;
             default:
-                res = "\033[0mNOCOULEUR";
+                res = "\033[0mX";
         }
         return res;
     }

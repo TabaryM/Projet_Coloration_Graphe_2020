@@ -30,7 +30,7 @@ public class Sommet {
 
     @Override
     public String toString() {
-        return Couleur.colorCode(couleur) + numSommet;
+        return Couleur.colorCode(couleur) + numSommet + Couleur.colorCode(Couleur.NOCOULEUR);
     }
 
 }

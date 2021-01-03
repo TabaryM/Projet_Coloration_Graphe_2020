@@ -70,10 +70,9 @@ public class Graphe implements Iterable<Sommet>{
 
         if(!sommet.isColorie()){
             for(Sommet voisin : voisins){
-                if(voisin.isColorie()){
-                    couleursVoisins.add(voisin.getCouleur());
-                }
+                couleursVoisins.add(voisin.getCouleur());
             }
+
             for(Couleur couleur : couleursDispoDepart){
                 if(couleursVoisins.contains(couleur)){
                     while (couleursDispoFin.contains(couleur)) {
@@ -81,6 +80,7 @@ public class Graphe implements Iterable<Sommet>{
                     }
                 }
             }
+
             if(!couleursDispoFin.isEmpty()){
                 sommet.setCouleur(couleursDispoFin.get(0));
                 List<Couleur> couleursDispoSuccesseurs = Couleur.getCouleur3Coloriage();
@@ -101,33 +101,36 @@ public class Graphe implements Iterable<Sommet>{
         return res;
     }
 
-    public boolean clique4(Sommet s1, Sommet s2, Sommet s3){
-        boolean res = false;
+    public List<Sommet> clique4(Sommet s1, Sommet s2, Sommet s3){
+        List<Sommet> res = new ArrayList<>();
         if(s1 == null){
-            for(Sommet sommet : sommets){
-                if(!res) {
+            for(Sommet sommet : this.sommets){
+                if(res.size() < 4) {
                     res = clique4(sommet, null, null);
                 }
             }
         } else if (s2 == null){
             for(Sommet voisin : voisins(s1)){
-                if(!res) {
+                if(res.size() < 4) {
                     res = clique4(s1, voisin, null);
                 }
             }
         } else if (s3 == null){
             for(Sommet voisin : voisins(s1)){
-                if(!res) {
+                if(res.size() < 4) {
                     if(voisins(s2).contains(voisin)) {
                         res = clique4(s1, s2, voisin);
                     }
                 }
             }
         } else {
+            res.add(s1);
+            res.add(s2);
+            res.add(s3);
             for(Sommet voisin : voisins(s1)){
-                if(!res){
+                if(res.size() < 4){
                     if(voisins(s2).contains(voisin) && voisins(s3).contains(voisin)){
-                        res = true;
+                        res.add(voisin);
                     }
                 }
             }
