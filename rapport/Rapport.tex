@@ -101,7 +101,6 @@
         \item \emph{degre(G, S)} qui retourne le degré du sommet S dans G\@.
     \end{itemize}
 
-    \bigskip
     Cet algorithme utilisera aussi la méthode \emph{plus\_petit\_sommet(G : graphe)},
     définie ci-dessous, qui retourne le sommet de degré le plus petit du graphe G\@.
 
@@ -113,6 +112,7 @@
     Pour chercher efficacement toutes les 4-cliques on fait une recherche récursive pour avoir un backtracking.
     Voici la fonction récursive utilisée :
     \input{4_clique}
+    \newpage
 
     \subsection{Proposez un algorithme qui vérifie qu'un 3-coloriage d'un graphe est valide.}\label{subsec:Q3D}
     \input{3_coloriage_verif.tex}
@@ -157,23 +157,26 @@
     \subsection{Montrer formellement si cette conjecture est vraie ou fausse}\label{subsec:Q4D}
     Si un graphe est biparti, alors il est possible de le colorier avec une couleur par partie, autrement dit, il est 2-coloriable.
 
-    Prouvons donc que les N-cubes sont biparti.
+    Prouvons donc que les N-cubes sont biparti.\bigskip
 
     On peut voir facilement que un 1-cube est biparti, avec dans une partie le sommet 0, et dans l'autre le sommet 1.
 
     Supposons qu'un k-cube (graphe G) est biparti.
     Construisons un k+1-cube G' à partir de G.
-    Les sommets de G' sont tous les sommets de G, ainsi que pour chaque sommet $s_i$ un nouveau sommet $s_{i+2^k}$.\\
+    Les sommets de G' sont tous les sommets de G, ainsi que pour chaque sommet $s_i$ un nouveau sommet $s_{i+2^k}$.
+
     Les arêtes de G' sont toutes les arêtes de G,
-    ainsi que pour toutes les arêtes reliant $s_i$ à $s_j$ dans G, on créer une arête reliant $s_{i+2^k}$ à $s_{j+2^k}$.
-    Avec $s_i$ dans une des deux partie du graphe G,
+    ainsi que pour toutes les arêtes reliant $s_i$ à $s_j$ dans G, on crée une arête reliant $s_{i+2^k}$ à $s_{j+2^k}$.
+
+    Avec $s_i$ dans une des deux parties du graphe G,
     on a $s_i$ dans la même partie dans G' et $s_{i+2^k}$ dans l'autre partie de G'.
     Le k+1-cube ainsi construit est donc aussi biparti.
 
+    \bigskip
     Nous venons ainsi de construire récursivement la preuve qu'un N-cube est toujours biparti.
 
     Étant donné qu'un graphe biparti est 2-coloriable, les N-cubes sont aussi 2-coloriables.
 
-    La conjecture faite précédement est donc vraie.
+    La conjecture faite précédemment est donc vraie.
 
 \end{document}
