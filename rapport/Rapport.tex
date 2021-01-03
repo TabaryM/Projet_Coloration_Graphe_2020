@@ -62,7 +62,7 @@
     La vérification de l'existence d'une arête reliant deux sommets de même couleur a comme complexité au pire cas $O(m)$.
     En effet il suffit de parcourir chaque arête et regarder la couleur de ses deux extrémités.\\
     L'incrémentation de la couleur de chaque sommet en moyenne prend $\log_3(m)$ en temps.\\
-    Ainsi cet algorithme a une complexité de $O(3^n*m\log_3(m))$, il n'est donc pas applicable en pratique.
+    Ainsi cet algorithme a une complexité de $O(3^n * \left( m + \log_3(m) \right) )$, il n'est donc pas applicable en pratique.
 
     \newpage
 
