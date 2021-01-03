@@ -1,8 +1,6 @@
 package graphe;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -42,6 +40,60 @@ public class Graphe implements Iterable<Sommet>{
             e.printStackTrace();
         }
         return res;
+    }
+
+    public static Graphe getGrapheFromNCube(int n){
+        Graphe res = null;
+
+        String formatBit = "%"+n+"s";
+
+        int taille = (int) Math.pow(2,n);
+        boolean[][] matrice = new boolean[taille][taille];
+
+        char[] tempSommetI;
+        char[] tempSommetJ;
+
+        int cptBitDifferent;
+
+        for(int i = 0; i < taille ; i++){
+            tempSommetI = String.format(formatBit, Integer.toBinaryString(i)).replace(' ', '0').toCharArray();
+            for(int j = 0; j < taille ; j++){
+                tempSommetJ = String.format(formatBit, Integer.toBinaryString(j)).replace(' ', '0').toCharArray();
+
+                cptBitDifferent = 0;
+                //on compare bit a bit
+                for(int k = 0; k < n; k++) {
+                    if(tempSommetI[k] != tempSommetJ[k] ){
+                        cptBitDifferent++;
+                    }
+                    if(cptBitDifferent == 2) break; // on sort si il y a 2 bit differents
+                }
+                matrice[i][j] = cptBitDifferent == 1;
+            }
+        }
+        res = new Graphe(matrice, taille);
+
+        return res;
+    }
+
+    public static void saveGraphe(String path, Graphe graphe){
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(path));
+
+            writer.write(graphe.nbSommets+"\n");
+
+            for(int i = 0; i < graphe.nbSommets; i++){
+                for(int j = 0; j < graphe.nbSommets; j++){
+                    if(graphe.matriceAdjacence[i][j]) writer.write('1');
+                    else writer.write('0');
+                }
+                writer.write('\n');
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Sommet plusPetitSommet(){
